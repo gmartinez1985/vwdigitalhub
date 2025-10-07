@@ -239,6 +239,8 @@ If any of these rules are violated, the program execution fails with an appropri
 - Robots are executed sequentially — one finishes its route before the next starts.
 - The workspace is initially empty and rectangular, with no obstacles.
 - Input format strictly follows the given specification (two lines per robot).
+- The workspace is initially empty and rectangular, with no obstacles (obstacles could be added via a workspace decorator without changing the domain model).
+
 
 ### Use Cases
 - **`ExecuteInstructionsService`**: Orchestrates instruction execution, validates movements, and marks final positions.
@@ -256,6 +258,11 @@ If any of these rules are violated, the program execution fails with an appropri
 - **Static factory methods** (e.g., `Robot.create()`) are used to control aggregate creation and enforce invariants during instantiation.
 - **No synchronization** is required since robots execute sequentially and all boundary and collision checks are handled via `Workspace`.
 - The architecture emphasizes **testability and isolation**, allowing aggregates, services, and instructions to be tested independently without reliance on infrastructure or external frameworks.
+- Extensibility: `Workspace` can be decorated to add policies like obstacles without changing the aggregate.
+  For example, an `ObstacleWorkspaceDecorator` (over a `Grid` interface) can reject moves into obstacle cells while delegating bounds/occupation checks to the base workspace.
+
+### Future Extensions
+- **Obstacles via Decorator**: Introduce a `Grid` interface and an `ObstacleWorkspaceDecorator` to add obstacle checks by composition, preserving the current aggregate and invariants.
 
 ---
 
