@@ -278,19 +278,6 @@ If any of these rules are violated, the program execution fails with an appropri
 
 ---
 
-## Run Instructions
-
-### Prerequisites
-- Java 17
-- Maven 3.9.11
-
-### Build (skip tests)
-```bash
-mvn -q -e -DskipTests package
-```
-
----
-
 ## Testing
 
 ### Testing Strategy
